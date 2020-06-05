@@ -9,13 +9,11 @@ class Tanh(Module):
          super(Tanh, self).__init__()
     
     def updateOutput(self, inpt):
-        # <Your Code Goes Here>
-        raise NotImplementedError()
+        self.output = np.tanh(inpt)  
         return self.output
     
     def updateGradInput(self, inpt, gradOutput):
-        # <Your Code Goes Here>
-        raise NotImplementedError()
+        self.gradInput = gradOutput * (1-np.square(self.output))
         return self.gradInput
     
     def __repr__(self):

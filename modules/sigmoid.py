@@ -9,13 +9,12 @@ class Sigmoid(Module):
          super(Sigmoid, self).__init__()
     
     def updateOutput(self, inpt):
-        # <Your Code Goes Here>
-        raise NotImplementedError()
+        self.output = 1 / (1 + np.exp(-inpt))
+
         return self.output
     
     def updateGradInput(self, inpt, gradOutput):
-        # <Your Code Goes Here>
-        raise NotImplementedError() 
+        self.gradInput = gradOutput * self.output * (1-self.output)
         return self.gradInput
     
     def __repr__(self):

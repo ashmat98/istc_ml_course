@@ -8,13 +8,12 @@ class ReLU(Module):
          super(ReLU, self).__init__()
     
     def updateOutput(self, inpt):
-        # <Your Code Goes Here>
-        raise NotImplementedError()
+        self.output = inpt * (inpt>0).astype(float)
+
         return self.output
     
     def updateGradInput(self, inpt, gradOutput):
-        # <Your Code Goes Here>
-        raise NotImplementedError()
+        self.gradInput = gradOutput * (inpt>0).astype(float)
         return self.gradInput
     
     def __repr__(self):

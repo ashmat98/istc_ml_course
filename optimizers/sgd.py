@@ -32,7 +32,8 @@ def sgd_momentum(x, dx, config, state):
             
             cur_old_grad = state['old_grad'].setdefault(i, np.zeros_like(cur_dx))
             
-            cur_old_grad = config['momentum'] * cur_old_grad + config['learning_rate'] * cur_dx
+            cur_old_grad = config['momentum'] * cur_old_grad + \
+                config['learning_rate'] * cur_dx
             
             state['old_grad'][i] = cur_old_grad
             

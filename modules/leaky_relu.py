@@ -13,13 +13,13 @@ class LeakyReLU(Module):
         self.slope = slope
         
     def updateOutput(self, inpt):
-        # <Your Code Goes Here>
-        raise NotImplementedError()
+        self.output = inpt * (1 - (1 -self.slope) * (inpt < 0))
+        
         return self.output
     
     def updateGradInput(self, inpt, gradOutput):
-        # <Your Code Goes Here>
-        raise NotImplementedError()
+        self.gradInput = gradOutput * (1 - (inpt < 0) * (1 - self.slope))
+
         return self.gradInput
     
     def __repr__(self):

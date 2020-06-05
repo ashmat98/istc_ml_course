@@ -35,13 +35,17 @@ class BatchMeanSubtraction(Module):
         self.old_mean = None 
         
     def updateOutput(self, inpt):
-        # <Your Code Goes Here>
-        raise NotImplementedError()
+        if self.old_mean is None:
+            self.old_mean = np.mean(inpt, axis = 0)
+        if self.train:
+            self.old_mean = self.alpha * self.old_mean + \
+                np.mean(inpt, axis = 0) * (1 - self.alpha)
+        self.output = inpt-self.old_mean    
         return self.output
     
     def updateGradInput(self, inpt, gradOutput):
-        # <Your Code Goes Here>
-        raise NotImplementedError()
+        self.gradInput = (1-(1-self.alpha)/inpt.shape[0])*gradOutput
+        
         return self.gradInput
     
     def __repr__(self):

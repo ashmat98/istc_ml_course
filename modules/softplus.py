@@ -11,13 +11,13 @@ class SoftPlus(Module):
         super(SoftPlus, self).__init__()
     
     def updateOutput(self, inpt):
-        # <Your Code Goes Here>
-        raise NotImplementedError()
+        self.output = np.log(1 + np.exp(inpt))
+
         return self.output
     
     def updateGradInput(self, inpt, gradOutput):
-        # <Your Code Goes Here>
-        raise NotImplementedError()
+        self.gradInput = gradOutput / (1 + np.exp(-inpt))
+
         return self.gradInput
     
     def __repr__(self):

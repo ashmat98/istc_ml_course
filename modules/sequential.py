@@ -30,8 +30,8 @@ class Sequential(Module):
         Training and testing behaviour differs for Dropout, BatchNorm.
         """
         self.training = True
-        # <Your Code Goes Here>
-        raise NotImplementedError()
+        for module in self.modules:
+            module.train()
     
     def evaluate(self):
         """
@@ -39,8 +39,8 @@ class Sequential(Module):
         Training and testing behaviour differs for Dropout, BatchNorm.
         """
         self.training = False
-        # <Your Code Goes Here>
-        raise NotImplementedError()
+        for module in self.modules:
+            module.evaluate()
         
     def updateOutput(self, inpt):
         """
@@ -54,8 +54,10 @@ class Sequential(Module):
             
         Just write a little loop. 
         """
-        # <Your Code Goes Here>
-        raise NotImplementedError()
+        for module in self.modules:
+            self.output = module.forward(inpt)
+            inpt = self.output
+
         return self.output
 
     def backward(self, inpt, gradOutput):
@@ -79,8 +81,12 @@ class Sequential(Module):
         !!!
         
         """
-        # <Your Code Goes Here>
-        raise NotImplementedError()
+        for i in range(len(self.modules)-1,0,-1):
+            gradInput = self.modules[i].backward(self.modules[i-1].output, gradOutput)
+            gradOutput = gradInput
+        gradInput = self.modules[0].backward(inpt,gradOutput)
+        self.gradInput = gradInput
+        
         return self.gradInput
       
 

@@ -9,14 +9,12 @@ class MSECriterion(Criterion):
         super(MSECriterion, self).__init__()
 
     def updateOutput(self, inpt, target):
-        # <Your Code Goes Here>
-        raise NotImplementedError()
+        self.output =  np.sum(np.square(inpt - target))  / inpt.size
 
         return self.output 
  
     def updateGradInput(self, inpt, target):
-        # <Your Code Goes Here>
-        raise NotImplementedError()
+        self.gradInput = (inpt - target)*2 / inpt.size
 
         return self.gradInput
 

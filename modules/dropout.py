@@ -28,12 +28,18 @@ class Dropout(Module):
 
     def updateOutput(self, inpt):
         # <Your Code Goes Here>
-        raise NotImplementedError()
+        if self.training:
+            self.mask = np.random.binomial(1,self.p,inpt.shape[1])
+            self.output = self.mask * inpt
+        else:
+            self.output = self.p * inpt
         return  self.output
     
     def updateGradInput(self, inpt, gradOutput):
-        # <Your Code Goes Here>
-        raise NotImplementedError()
+        if self.training:
+            self.gradInput = self.mask * gradOutput
+        else:
+            self.gradInput = self.p * gradOutput                
         return self.gradInput
         
     def __repr__(self):
